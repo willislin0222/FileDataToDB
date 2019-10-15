@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.document.dao.Document_Interface">   <!-- 命名空间，名字可以随意起，只要不冲突即可 -->
+     
+    <!-- 返回list的select语句，注意 resultMap的值是指向前面定义好的 -->
+    <!-- <select id="selectUsersByName" parameterType="string" resultMap="userResultMap">
+        select * from user where user.userName = #{userName}
+    </select> -->
+     
+     <insert id="insert" parameterType="com.document.pojo.DocumentVO" useGeneratedKeys="true" keyProperty="id">  
+        INSERT INTO Document 
+		(name,tel,sex,joindate,address)
+		VALUES(#{name},#{tel},#{sex},#{joindate},#{address}); 
+	</insert>
+	
+	<update id="update" parameterType="com.document.pojo.DocumentVO" >
+        update Document set name=#{name},tel=#{tel},sex=#{sex},joindate=#{joindate},address=#{address} where id=#{id}
+    </update>
+    
+    <delete id="delete" parameterType="int">
+        delete from Document where id=#{id}
+    </delete>
+	 
+    <select id="findDoumentByPrimaryKey" parameterType="int" resultType="com.document.pojo.DocumentVO">
+        select * from Document where id= #{id}
+    </select>
+    
+     <select id="getAll" resultType="com.document.pojo.DocumentVO">
+        select * from Document
+    </select>
+    
+</mapper>
